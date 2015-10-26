@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuizzesTable extends Migration
+class CreateOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,14 @@ class CreateQuizzesTable extends Migration
      */
     public function up()
     {
-        Schema::create('quizzes', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 45);
-            $table->date('date-time');
-            $table->integer('duration', false, true);
-            $table->text('description')->nullable();
+            $table->string('option', 100);
+            $table->integer('question_id', false, true)->unsigned();
             $table->timestamps();
+
+            $table->foreign('question_id')->references('id')
+                  ->on('questions')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateQuizzesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('quizzes');
+        Schema::drop('options');
     }
 }
