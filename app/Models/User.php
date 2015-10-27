@@ -1,6 +1,4 @@
-<?php
-
-namespace App;
+<?php namespace Models\App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -36,4 +34,9 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function student() {
+        return $this->hasOne('App\Models\Student');
+    }
+
 }

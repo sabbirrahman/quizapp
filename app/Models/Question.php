@@ -1,0 +1,24 @@
+<?php namespace Models\App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Question extends Model
+{
+    protected $table = 'questions';
+
+    public function options() {
+    	return $this->hasMany('App\Models\Option');
+    }
+
+    public function correctAnswers() {
+    	return $this->hasMany('App\Models\CorrectAnswer');
+    }
+
+    public function answers() {
+    	return $this->hasMany('App\Models\Answer');
+    }
+
+    public function quiz() {
+    	return $this->belongsTo('App\Models\Quiz');
+    }
+}
