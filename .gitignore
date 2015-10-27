@@ -3,3 +3,9 @@
 Homestead.yaml
 Homestead.json
 .env
+
+resources/*
+!/resources/assets/
+
+resources/assets/*
+!resources/assets/less/
