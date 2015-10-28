@@ -1,4 +1,4 @@
-<?php namespace Models\App;
+<?php namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +37,14 @@ class User extends Model implements AuthenticatableContract,
 
     public function student() {
         return $this->hasOne('App\Models\Student');
+    }
+    
+    public function isAdmin(){
+        return $this->role == 'admin';
+    }
+    
+    public function isStudent(){
+        return $this->role == 'student';
     }
 
 }
