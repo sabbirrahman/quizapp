@@ -3,61 +3,130 @@
 use Validator;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller
-{
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
+
+class AuthController extends Controller {
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    protected $redirectPath = '/student';
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'name'     => 'required|max:60',
+            'username' => 'required|max:30|alpha|unique:users',
+            'email'    => 'required|email|max:255|unique:users',
+            'password' => 'required|min:5|confirmed'
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'username' => $data['username'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
+            'role'     => 'student'
         ]);
+    }
+
+    public function getLogin()
+    {
+        return view('auth.login');
+    }
+
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'log' => 'required', 'password' => 'required',
+        ]);
+
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $this->hasTooManyLoginAttempts($request))
+        {
+            return $this->sendLockoutResponse($request);
+        }
+
+        $logValue = $request->input('log');
+
+        $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $credentials = [
+            $logAccess => $logValue,
+            'password' => $request->input('password')
+        ];
+
+        if (Auth::attempt($credentials, $request->has('remember')))
+        {
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
+
+        if ($throttles)
+        {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('log', 'remember'))
+            ->withErrors([
+                'log' => $this->getFailedLoginMessage(),
+            ]);
+    }
+
+    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    {
+        if ($throttles)
+        {
+            $this->clearLoginAttempts($request);
+        }
+
+        if (method_exists($this, 'authenticated'))
+        {
+            return $this->authenticated($request, Auth::user());
+        }
+
+        if (Auth::user()->role === 'admin')
+        {
+            return redirect()->intended('admin');
+        }
+
+        return redirect()->intended($this->redirectPath());
+    }
+
+
+    public function getRegister()
+    {
+        return view('auth.register');
+    }
+
+
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        Auth::login($this->create($request->all()));
+
+        return redirect($this->redirectPath());
     }
 }

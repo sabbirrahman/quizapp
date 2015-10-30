@@ -6,20 +6,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class PageController extends Controller
-{
+class PageController extends Controller {
+
     public function index()
     {
-        return view('index');
+        return "From index";
+//        return view('index');
     }
-    
+
     public function admin()
     {
-        return view('admin.dashboard');
+        return "From admin panel";
+//        return view('admin.dashboard');
     }
-    
+
     public function student()
     {
-        return view('student.dashboard');
+        return "From student panel";
+//        return view('student.dashboard');
     }
 }

@@ -16,7 +16,7 @@ class isStudent {
 	{
 		$user = $request->user();
 
-		if ($user && $user->isStuent())
+		if ($user && $user->isStudent())
 		{
 			return $next($request);
 		}
