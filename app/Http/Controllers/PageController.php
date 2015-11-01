@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -10,19 +8,16 @@ class PageController extends Controller {
 
     public function index()
     {
-        return "From index";
-//        return view('index');
+        return view('index');
     }
 
     public function admin()
     {
-        return "From admin panel";
-//        return view('admin.dashboard');
+        return view('admin.admin');
     }
 
     public function student()
     {
-        return "From student panel";
-//        return view('student.dashboard');
+        return view('student.student');
     }
 }

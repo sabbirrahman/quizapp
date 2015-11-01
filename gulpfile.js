@@ -14,9 +14,9 @@ var elixir = require('laravel-elixir');
 elixir.config.sourcemaps = false;
 
 elixir(function(mix) {
-  mix.less([
-    "styles.less"
-  ], "public/css/styles.css", "resources/assets/");
+  mix.less(["styles.less" ], "public/css/styles.css",  "resources/assets/");
+  mix.less(["admin.less"  ], "public/css/admin.css",   "resources/assets/");
+  mix.less(["student.less"], "public/css/student.css", "resources/assets/");
 
   mix.styles([
     "bootstrap/dist/css/bootstrap.min.css",

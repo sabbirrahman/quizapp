@@ -1,7 +1,14 @@
-form {
+form { 
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+	    transition: background-color 5000s ease-in-out 0s;
+	}
 	.mdl-textfield__label,
 	.mdl-checkbox__label,
 	.mdl-textfield__input {
+		background: transparent;
 		color: #232323;
 		font-family: @font6;
 	}

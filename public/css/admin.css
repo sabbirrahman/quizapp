@@ -95,19 +95,24 @@ html.lt-ie9 {
   position: relative;
 }
 a {
-  color: #ffffff;
   text-decoration: none;
 }
 a:hover,
 a:active,
 a:visited,
 a:link {
-  color: #ffffff;
   text-decoration: none;
 }
 body {
+  background: url('../img/bg2.jpg') center center;
   position: relative;
   font-size: 16px;
+}
+.bg2 {
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
 }
 h3 {
   text-transform: uppercase;
