@@ -1,4 +1,4 @@
-<table class="table mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+<table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <thead>
         <tr>
             <th class="mdl-data-table__cell--non-numeric">Title</th>
@@ -9,10 +9,15 @@
     </thead>
     <tbody>
       <tr ng-repeat="quiz in quizzes">
-          <td class="mdl-data-table__cell--non-numeric">{{quiz.title}}</td>
+          <td class="mdl-data-table__cell--non-numeric">
+            <a href="#/quiz/{{quiz.id}}/questions">{{quiz.title}}</a>
+          </td>
           <td>{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
           <td>{{quiz.duration}} Hour<span ng-if="quiz.duration > 1">s</span></td>
-          <td><i class="material-icons">delete</i></td>
+          <td>
+              <a href="#/quiz/edit/{{quiz.id}}"><i class="material-icons clickable">mode_edit</i></a>
+              <i class="material-icons clickable" ng-click="destroy($index)">delete</i>
+          </td>
       </tr>
     </tbody>
 </table>

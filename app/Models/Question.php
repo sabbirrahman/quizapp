@@ -6,6 +6,8 @@ class Question extends Model
 {
     protected $table = 'questions';
 
+    protected $fillable = ['questions', 'type'];
+
     public function options() {
     	return $this->hasMany('App\Models\Option');
     }

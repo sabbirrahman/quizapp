@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Quiz;
 use App\Models\Question;
-use App\Http\Request\QuestionRequest;
+use App\Http\Requests\QuestionRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -9,12 +10,19 @@ use App\Http\Controllers\Controller;
 class QuestionController extends Controller
 {
 
-    public function index()
+    public function index(Quiz $quiz)
     {
-        return Question::all()->toJson();        
+        $questions = Question::whereQuiz_id($quiz->id)->get();
+
+        foreach($questions as $question) {
+            $question['options']        = $question->options()->get();
+            $question['correct_answer'] = $question->correctAnswers()->first()->option()->first()->option;
+        }
+
+        return $questions;
     }
 
-    public function store(QuestionRequest $request)
+    public function store(Quiz $quiz, QuestionRequest $request)
     {
         Question::create($request->all());
     }
@@ -28,6 +36,7 @@ class QuestionController extends Controller
     {
         $question::update($request->all());
     }
+    
     public function destroy(Question $question)
     {
         $question->delete();

@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Quiz;
-use App\Http\Request\QuizRequest;
+use App\Http\Requests\QuizRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ class QuizController extends Controller
 
     public function store(QuizRequest $request)
     {
+        $request['date_time'] = new DateTime($request['date_time']);
         Quiz::create($request->all());
     }
 
@@ -26,7 +28,8 @@ class QuizController extends Controller
 
     public function update(QuizRequest $request, Quiz $quiz)
     {
-        $quiz::update($request->all());
+        $request['date_time'] = new DateTime($request['date_time']);
+        $quiz->update($request->all());
     }
     public function destroy(Quiz $quiz)
     {

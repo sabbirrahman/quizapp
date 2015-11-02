@@ -11,8 +11,18 @@ form {
 		background: transparent;
 		color: #232323;
 		font-family: @font6;
+		&::-webkit-input-placeholder { color: rgba(55, 55, 55, 1); }
+		&:-moz-placeholder 			 { color: rgba(55, 55, 55, 1); }
+		&::-moz-placeholder 		 { color: rgba(55, 55, 55, 1); }
+		&:-ms-input-placeholder 	 { color: rgba(55, 55, 55, 1); }
 	}
-
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button { 
+	    -webkit-appearance: none;
+	       -moz-appearance: none;
+	            appearance: none;
+	    margin: 0; 
+	}
 	.mdl-textfield__label:after {
 		bottom: 16px;
 	}

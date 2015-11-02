@@ -226,6 +226,9 @@ div[ng-view] {
   bottom: 20px;
   z-index: 1000;
 }
+.clickable {
+  cursor: pointer;
+}
 form input:-webkit-autofill,
 form input:-webkit-autofill:hover,
 form input:-webkit-autofill:focus,
@@ -239,9 +242,44 @@ form .mdl-textfield__input {
   color: #232323;
   font-family: "Titillium-Light";
 }
+form .mdl-textfield__label::-webkit-input-placeholder,
+form .mdl-checkbox__label::-webkit-input-placeholder,
+form .mdl-textfield__input::-webkit-input-placeholder {
+  color: #373737;
+}
+form .mdl-textfield__label:-moz-placeholder,
+form .mdl-checkbox__label:-moz-placeholder,
+form .mdl-textfield__input:-moz-placeholder {
+  color: #373737;
+}
+form .mdl-textfield__label::-moz-placeholder,
+form .mdl-checkbox__label::-moz-placeholder,
+form .mdl-textfield__input::-moz-placeholder {
+  color: #373737;
+}
+form .mdl-textfield__label:-ms-input-placeholder,
+form .mdl-checkbox__label:-ms-input-placeholder,
+form .mdl-textfield__input:-ms-input-placeholder {
+  color: #373737;
+}
+form input[type=number]::-webkit-inner-spin-button,
+form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
 form .mdl-textfield__label:after {
   bottom: 16px;
 }
 form .mdl-textfield {
   width: 100%;
+}
+.table.mdl-data-table th,
+.table.mdl-data-table td {
+  vertical-align: middle;
+}
+.table.mdl-data-table th a,
+.table.mdl-data-table td a {
+  color: #373737;
 }

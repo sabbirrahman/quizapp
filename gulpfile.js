@@ -1,5 +1,13 @@
-var elixir = require('laravel-elixir');
+var gulp = require('gulp');
+var templateCache = require('gulp-angular-templatecache');
+ 
+gulp.task('default', function () {
+  return gulp.src('public/templates/**/*.html')
+    .pipe(templateCache())
+    .pipe(gulp.dest('public/js'));
+});
 
+var elixir = require('laravel-elixir');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management

@@ -43,8 +43,9 @@ Route::controllers(['password' => 'Auth\PasswordController']);
 
 // Admin APIs
 Route::group(['prefix' => 'api/admin/', 'middleware' => 'admin'], function(){
-	Route::resource('quizzes', 'QuizController');
-	Route::resource('students', 'StudentController');
+	Route::resource('quizzes', 'QuizController', ['except' => ['create', 'edit']]);
+	Route::resource('quizzes.questions', 'QuestionController', ['except' => ['create', 'edit']]);
+	Route::resource('students', 'StudentController', ['except' => ['create', 'edit']]);
 });
 
 // Student APIs

@@ -6,6 +6,8 @@ class Quiz extends Model
 {
     protected $table = 'quizzes';
 
+    protected $fillable = ['title', 'date_time', 'duration', 'description'];
+
     public function questions() {
     	return $this->hasMany('App\Models\Question');
     }
