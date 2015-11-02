@@ -12,7 +12,7 @@ class QuizzesTableSeeder extends Seeder {
         Quiz::create([
     		'id'          => 1,
     		'title'       => 'ICT Quiz 2015',
-    		'date-time'   => new DateTime('2015-11-01 1:00 GMT'),
+    		'date_time'   => new DateTime('2015-11-01 13:00 GMT'),
     		'duration'    => 2,
     		'description' => 'First Test Quiz'
         ]);
@@ -20,7 +20,7 @@ class QuizzesTableSeeder extends Seeder {
         Quiz::create([
     		'id'          => 2,
     		'title'       => 'Science Quiz 2015',
-    		'date-time'   => new DateTime('2015-11-05 2:00 GMT'),
+    		'date_time'   => new DateTime('2015-11-05 14:00 GMT'),
     		'duration'    => 1,
     		'description' => 'Second Test Quiz'
         ]);
@@ -28,7 +28,7 @@ class QuizzesTableSeeder extends Seeder {
         Quiz::create([
     		'id'          => 3,
     		'title'       => 'Technology Quiz 2015',
-    		'date-time'   => new DateTime('2015-11-11 12:00 GMT'),
+    		'date_time'   => new DateTime('2015-11-11 11:00 GMT'),
     		'duration'    => 3,
     		'description' => 'Third Test Quiz'
         ]);

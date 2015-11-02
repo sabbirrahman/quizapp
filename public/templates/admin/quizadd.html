@@ -1,0 +1,45 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-6 box mdl-shadow--2dp">
+			<form ng-submit="">
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" ng-model="quiz.title" type="text" id="title" />
+					<label class="mdl-textfield__label" for="title">Title...</label>
+			  	</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div id="datetimepicker2" class="mdl-textfield mdl-js-textfield input-append" style="position:relative;">
+    						<input class="mdl-textfield__input" data-format="MM/dd/yyyy HH:mm:ss PP" type="text" ng-model="quiz.date_time" id="date_time" placeholder="Date &amp Time">
+							<label class="mdl-textfield__label" for="date_time"></label>
+						    <span class="add-on" style="position:absolute;right:0;top:25px">
+						      	<i data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i>
+						    </span>
+					  	</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" ng-model="quiz.duration" type="number" id="duration" />
+							<label class="mdl-textfield__label" for="duration">Duration...</label>
+					  	</div>	
+					</div>
+				</div>
+
+			  	<div class="mdl-textfield mdl-js-textfield">
+			    	<textarea class="mdl-textfield__input" ng-model="quiz.description" type="text" rows="3" id="description" ></textarea>
+			    	<label class="mdl-textfield__label" for="description">Description...</label>
+			  	</div>
+
+				<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="create()">Create</button><br><br>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker2').datetimepicker({
+      language: 'en',
+      pick12HourFormat: true
+    });
+  });
+</script>

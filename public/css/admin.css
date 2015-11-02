@@ -214,6 +214,18 @@ footer span {
 footer span a:hover {
   color: #090909;
 }
+div[ng-view] {
+  padding: 20px;
+}
+.box {
+  background: rgba(255, 255, 255, 0.6);
+}
+.floating-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}
 form input:-webkit-autofill,
 form input:-webkit-autofill:hover,
 form input:-webkit-autofill:focus,
@@ -226,4 +238,10 @@ form .mdl-textfield__input {
   background: transparent;
   color: #232323;
   font-family: "Titillium-Light";
+}
+form .mdl-textfield__label:after {
+  bottom: 16px;
+}
+form .mdl-textfield {
+  width: 100%;
 }

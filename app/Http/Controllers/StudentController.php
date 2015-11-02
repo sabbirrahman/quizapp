@@ -11,7 +11,13 @@ class StudentController extends Controller
 
     public function index()
     {
-        return Student::all()->toJson();
+        $students = Student::all();
+        foreach($students as $student) {
+            $u = $student->user()->first();
+            $student['name' ] = $u->name;
+            $student['email'] = $u->email;
+        }
+        return $students;
     }
 
     public function store(StudentRequest $request)

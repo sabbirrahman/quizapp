@@ -12,21 +12,21 @@ class StudentsTableSeeder extends Seeder
         Student::create([
             'student_id' => 'M21132111002',
             'batch' 	 => '25',
-            'department' => 'Sabbir Rahman',
+            'department' => 'CSE',
             'user_id'    => '2'
         ]);
 
         Student::create([
             'student_id' => 'M21132111009',
             'batch'      => '27',
-            'department' => 'Joynal Abedin',
+            'department' => 'BBA',
             'user_id'    => '3'
         ]);
 
         Student::create([
             'student_id' => 'F21132111004',
             'batch'      => '26',
-            'department' => 'Shaika Sayed Marzia',
+            'department' => 'English',
             'user_id'    => '4'
         ]);
     }

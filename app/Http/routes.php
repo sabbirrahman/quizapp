@@ -43,7 +43,8 @@ Route::controllers(['password' => 'Auth\PasswordController']);
 
 // Admin APIs
 Route::group(['prefix' => 'api/admin/', 'middleware' => 'admin'], function(){
-
+	Route::resource('quizzes', 'QuizController');
+	Route::resource('students', 'StudentController');
 });
 
 // Student APIs

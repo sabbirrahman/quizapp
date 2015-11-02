@@ -1,0 +1,21 @@
+<table class="table mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Title</th>
+            <th>Date &amp Time</th>
+            <th>Duration</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="quiz in quizzes">
+          <td class="mdl-data-table__cell--non-numeric">{{quiz.title}}</td>
+          <td>{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
+          <td>{{quiz.duration}} Hour<span ng-if="quiz.duration > 1">s</span></td>
+          <td><i class="material-icons">delete</i></td>
+      </tr>
+    </tbody>
+</table>
+<a href="#/quiz/add" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored floating-button">
+    <i class="material-icons">add</i>
+</a>

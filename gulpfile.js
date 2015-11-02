@@ -21,17 +21,20 @@ elixir(function(mix) {
   mix.styles([
     "bootstrap/dist/css/bootstrap.min.css",
     "material-design-lite/material.min.css",
+    "date-time-picker/bootstrap-datetimepicker.min.css",
     //"malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css",
     //"foundation/css/foundation-slider.min.css",
     ], "public/css/library.css", "resources/assets/");
 
   mix.scripts([
     "jquery/dist/jquery.min.js",
+    "bootstrap/dist/js/bootstrap.min.js",
+    "date-time-picker/bootstrap-datetimepicker.min.js",
     "angular/angular.min.js",
     "angular-route/angular-route.min.js",
+    "angular-resource/angular-resource.min.js",
     "material-design-lite/material.min.js",
     //"angular-filter/dist/angular-filter.min.js",
-    "bootstrap/dist/js/bootstrap.min.js",
     //"malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
     //"retina.js/dist/retina.min.js",
     //"foundation/js/foundation.min.js",
