@@ -6,7 +6,5 @@ Homestead.json
 /.idea
 
 resources/*
-!/resources/assets/
-
-resources/assets/*
+!/resources/views/
 !resources/assets/less/
