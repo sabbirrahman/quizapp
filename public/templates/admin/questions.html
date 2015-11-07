@@ -1,18 +1,18 @@
-<table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+<table class="table mdl-shadow--2dp">
     <thead>
         <tr>
-            <th class="mdl-data-table__cell--non-numeric">Question</th>
-            <th># of Options</th>
-            <th>Correct Answer</th>
+            <th>Question</th>
+            <th class="text-right"># No. of Options</th>
+            <th class="text-right">Correct Answer</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
       <tr ng-repeat="question in questions">
-          <td class="mdl-data-table__cell--non-numeric">{{question.question}}</td>
-          <td>{{question.options.length}}</td>
-          <td>{{question.correct_answer}}</span></td>
-          <td>
+          <td>{{question.question | limitTo:50}} <span ng-show="question.question.length > 50">...</span></td>
+          <td class="text-right">{{question.options.length}}</td>
+          <td class="text-right">{{question.correct_answer}}</span></td>
+          <td class="icons text-right">
               <a href="#/quiz/{{quiz_id}}/question/edit/{{question.id}}"><i class="material-icons clickable">mode_edit</i></a>
               <i class="material-icons clickable" ng-click="destroy($index)">delete</i>
           </td>

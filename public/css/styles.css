@@ -94,120 +94,29 @@ html.lt-ie9 {
   margin: 0 auto;
   position: relative;
 }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 82, 82, 0.6);
+}
 a {
-  color: #ffffff;
   text-decoration: none;
 }
 a:hover,
 a:active,
 a:visited,
 a:link {
-  color: #ffffff;
   text-decoration: none;
 }
 body {
+  background: #e0e0e0;
   position: relative;
   font-size: 16px;
 }
-h3 {
-  text-transform: uppercase;
-  font-family: "Lato-Regular";
-  font-size: 20px;
-}
-h4 {
-  text-transform: uppercase;
-  font-family: "Lato-Bold";
-  font-size: 13px;
-}
-h5 {
-  font-family: "Lato-Bold";
-  font-size: 12px;
-}
 ul {
   list-style: none;
-}
-.background-image {
-  position: fixed;
-  left: 0;
-  top: 0;
-  text-align: center;
-  overflow: hidden;
-}
-.background-image img {
-  width: 100%;
-}
-.wrapper {
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-}
-.logoBox {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-}
-.logoBox .logo {
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
-  background: rgba(255, 0, 0, 0.75);
-  font-family: "Lato-Bold";
-  line-height: 100px;
-  text-align: center;
-  font-size: 28px;
-  margin: 0 auto;
-  color: #f9f9f9;
-  height: 100px;
-  width: 150px;
-}
-.loginBox {
-  background: rgba(255, 255, 255, 0.6);
-  margin-top: 150px;
-  min-height: 280px;
-  padding: 20px;
-}
-.loginBox.loggedin h2 {
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.75);
-  font-family: "Lato-Bold";
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-.loginBox.loggedin p {
-  font-family: "Lato-Regular";
-}
-.info {
-  background: rgba(255, 255, 255, 0.6);
-  margin-top: 150px;
-  min-height: 280px;
-  padding: 20px;
-}
-.info h2 {
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.75);
-  font-family: "Lato-Bold";
-  font-size: 24px;
-}
-.info p {
-  font-family: "Lato-Regular";
-}
-footer {
-  font-family: "Lato-Light";
-  font-size: 14px;
-  color: #f9f9f9;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-}
-footer span {
-  background: rgba(255, 0, 0, 0.6);
-  display: block;
-  padding: 5px;
-  width: 480px;
-  margin: 0 auto;
-}
-footer span a:hover {
-  color: #090909;
 }
 form input:-webkit-autofill,
 form input:-webkit-autofill:hover,
@@ -215,31 +124,31 @@ form input:-webkit-autofill:focus,
 form input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
-form .mdl-textfield__label,
 form .mdl-checkbox__label,
-form .mdl-textfield__input {
+form .mdl-textfield__input,
+form .mdl-textfield__label {
   background: transparent;
   color: #232323;
   font-family: "Titillium-Light";
 }
-form .mdl-textfield__label::-webkit-input-placeholder,
 form .mdl-checkbox__label::-webkit-input-placeholder,
-form .mdl-textfield__input::-webkit-input-placeholder {
+form .mdl-textfield__input::-webkit-input-placeholder,
+form .mdl-textfield__label::-webkit-input-placeholder {
   color: #373737;
 }
-form .mdl-textfield__label:-moz-placeholder,
 form .mdl-checkbox__label:-moz-placeholder,
-form .mdl-textfield__input:-moz-placeholder {
+form .mdl-textfield__input:-moz-placeholder,
+form .mdl-textfield__label:-moz-placeholder {
   color: #373737;
 }
-form .mdl-textfield__label::-moz-placeholder,
 form .mdl-checkbox__label::-moz-placeholder,
-form .mdl-textfield__input::-moz-placeholder {
+form .mdl-textfield__input::-moz-placeholder,
+form .mdl-textfield__label::-moz-placeholder {
   color: #373737;
 }
-form .mdl-textfield__label:-ms-input-placeholder,
 form .mdl-checkbox__label:-ms-input-placeholder,
-form .mdl-textfield__input:-ms-input-placeholder {
+form .mdl-textfield__input:-ms-input-placeholder,
+form .mdl-textfield__label:-ms-input-placeholder {
   color: #373737;
 }
 form input[type=number]::-webkit-inner-spin-button,
@@ -252,6 +161,388 @@ form input[type=number]::-webkit-outer-spin-button {
 form .mdl-textfield__label:after {
   bottom: 16px;
 }
+form .mdl-radio__label,
 form .mdl-textfield {
   width: 100%;
+}
+.table {
+  background: #ffffff;
+}
+.table thead tr th {
+  font-weight: 100;
+  font-family: "Titillium-Light";
+  padding: 15px 30px;
+  font-size: 13px;
+  vertical-align: middle;
+  color: rgba(0, 0, 0, 0.5);
+}
+.table tbody tr td {
+  padding: 15px 30px;
+  font-size: 14px;
+  font-family: "Titillium-Light";
+  vertical-align: middle;
+  color: #000000;
+}
+.table tbody tr td a {
+  padding: 0;
+  color: #000000;
+}
+.table tbody tr td a:hover {
+  color: #ff5252;
+}
+.table tbody tr td.icons {
+  padding: 0px 30px;
+}
+.table tbody tr td.icons i {
+  color: #000000;
+}
+.table tbody tr td.icons i:hover {
+  color: #ff5252;
+}
+.homepage {
+  background: url('../img/bg.jpg');
+  background-size: 100% 100%;
+}
+.wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.logoBox {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.logoBox .logo {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 82, 82, 0.6);
+  font-family: "Lato-Bold";
+  line-height: 100px;
+  text-align: center;
+  font-size: 1.750em;
+  margin: 0 auto;
+  color: #f9f9f9;
+  height: 100px;
+  width: 150px;
+}
+.loginBox {
+  background: rgba(255, 255, 255, 0.6);
+  min-height: 280px;
+  margin: 10px 0;
+  padding: 20px;
+}
+.loginBox.loggedin h2 {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.75);
+  color: #ff5252;
+  font-family: "Lato-Bold";
+  margin-bottom: 20px;
+  font-size: 1.500em;
+}
+.loginBox.loggedin p {
+  font-family: "Lato-Regular";
+}
+.info {
+  background: rgba(255, 255, 255, 0.6);
+  min-height: 280px;
+  margin: 10px 0;
+  padding: 20px;
+}
+.info h2 {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.75);
+  font-family: "Lato-Bold";
+  font-size: 1.500em;
+  color: #ff5252;
+}
+.info p {
+  font-family: "Lato-Regular";
+}
+footer {
+  font-family: "Lato-Light";
+  font-size: 0.875em;
+  text-align: center;
+  position: fixed;
+  color: #f9f9f9;
+  width: 100%;
+  bottom: 0;
+}
+footer span {
+  background: rgba(255, 82, 82, 0.6);
+  display: block;
+  margin: 0 auto;
+  padding: 5px;
+  width: 400px;
+}
+footer span a {
+  color: #f3f3f3;
+}
+footer span a:hover {
+  color: #a6a6a6;
+}
+@media only screen and (max-width: 720px) {
+  .homepage {
+    background-size: auto 100%;
+  }
+}
+.mdl-layout .mdl-layout__header .mdl-button {
+  color: #ffffff;
+}
+.mdl-layout .mdl-layout__header .mdl-menu {
+  padding: 0;
+}
+.mdl-layout .mdl-layout__header .mdl-menu .mdl-menu__item {
+  font-family: "Titillium-Bold";
+}
+.mdl-layout .mdl-layout__header .mdl-layout__drawer-button {
+  color: #ffffff;
+}
+.mdl-layout .mdl-layout__drawer {
+  background: #212121;
+  border-right: 0;
+  box-shadow: none;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  font-family: "Titillium-Bold";
+  color: #f3f3f3;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation .mdl-navigation__link .material-icons {
+  vertical-align: middle;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation .mdl-navigation__link .text {
+  padding-left: 10px;
+  vertical-align: middle;
+}
+.mdl-layout .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+  background: #2c2c2c;
+}
+.mdl-layout .mdl-layout-title.logo {
+  background: #03a9f4;
+}
+.mdl-layout .mdl-layout-title.logo a {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+  font-family: "Lato-Bold";
+  font-size: 1.25em;
+  color: #f9f9f9;
+}
+div[ng-view] {
+  padding: 15px;
+}
+.dashboard .mdl-card {
+  width: 100%;
+}
+.dashboard .mdl-card__title {
+  color: #ffffff;
+  height: 165px;
+}
+.dashboard .mdl-card__title .mdl-card__title-text {
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  font-family: "Titillium-Regular";
+  padding: 5px 10px;
+}
+.dashboard .mdl-card__supporting-text {
+  font-family: "Titillium-Regular";
+  font-size: 14px;
+  color: #222222;
+}
+.dashboard .quizzes > .mdl-card__title {
+  background: url('../img/quizzesbg.jpg') center / cover;
+}
+.dashboard .students > .mdl-card__title {
+  background: url('../img/studentsbg.jpg') center / cover;
+}
+.dashboard .stats > .mdl-card__title {
+  background: url('../img/statsbg.jpg') center / cover;
+}
+.dashboard .about > .mdl-card__title {
+  background: url('../img/aboutbg.jpg') center / cover;
+}
+.box {
+  background: #ffffff;
+}
+.floating-button {
+  position: fixed;
+  z-index: 1000;
+  bottom: 25px;
+  right: 25px;
+}
+.clickable {
+  cursor: pointer;
+}
+.questionform .option .mdl-textfield {
+  padding: 0;
+}
+.questionform .option .mdl-textfield .mdl-textfield__input {
+  padding: 1px 0px;
+}
+.questionform .option i {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  transition: 0.1s all ease-in;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  cursor: pointer;
+}
+.questionform .option:hover i {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.question-card {
+  background: #ffffff;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.question-card:first-child {
+  margin-top: 0;
+}
+.question-card:last-child {
+  margin-bottom: 0;
+}
+.question-card .question {
+  font-family: "Lato-Bold";
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.question-card .option {
+  font-family: "Titillium-Light";
+  font-size: 16px;
+}
+.question-card .option .mdl-radio {
+  margin: 2px auto;
+}
+.score {
+  background: #ffffff;
+  padding: 20px;
+  text-align: center;
+}
+.score span:first-child {
+  font-family: "Lato-Bold";
+}
+.score span:last-child {
+  font-family: "Titillium-Light";
+}
+.clock {
+  text-align: center;
+  height: calc(100vh - 100px);
+  padding-top: calc(50vh - 120px);
+}
+.clock .text {
+  text-align: center;
+  font-size: 20px;
+  font-family: "Titillium-Bold";
+}
+.clock .flip-clock {
+  margin: 0px auto;
+  width: 620px;
+  padding-top: 50px;
+}
+.flip-clock-small.flip-clock-wrapper {
+  margin: 0px auto;
+  width: 280px;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+.flip-clock-small.flip-clock-wrapper ul {
+  margin: 5px;
+  width: 30px;
+  height: 45px;
+  font-size: 20px;
+  line-height: 43.5px;
+}
+.flip-clock-small.flip-clock-wrapper ul li {
+  line-height: 43.5px;
+}
+.flip-clock-small.flip-clock-wrapper ul li a div div.inn {
+  font-size: 20px;
+}
+.flip-clock-small.flip-clock-wrapper .flip-clock-label {
+  right: -55px;
+}
+.flip-clock-small.flip-clock-wrapper .flip-clock-divider {
+  height: 50px;
+}
+.flip-clock-small.flip-clock-wrapper .flip-clock-dot.top {
+  top: 15px;
+}
+.flip-clock-small.flip-clock-wrapper .flip-clock-dot.bottom {
+  bottom: 10px;
+}
+.flip-clock-small.flip-clock-wrapper .flip-clock-meridium {
+  font-size: 20px;
+}
+.aboutpage {
+  padding: 0px 10px;
+}
+.aboutpage .box {
+  padding: 10px;
+}
+.aboutpage h3 {
+  font-family: "Lato-Bold";
+  padding: 10px 0px;
+  margin: 0;
+}
+.aboutpage p {
+  font-family: "Lato-Regular";
+  font-size: 16px;
+}
+.aboutpage h5 {
+  font-family: "Lato-Bold";
+  padding: 0;
+  margin: 0;
+}
+.aboutpage ul {
+  margin-top: 15px;
+  list-style: square;
+  padding-left: 50px;
+  font-family: "Lato-Regular";
+  font-size: 16px;
+}
+.aboutpage ul li {
+  padding-left: 0px;
+}
+.aboutpage .dinfo {
+  padding: 5px 0px;
+  font-size: 16px;
+}
+.aboutpage .dinfo i {
+  vertical-align: middle;
+}
+.aboutpage .dinfo .field {
+  font-family: "Lato-Bold";
+  display: inline-block;
+  width: 80px;
+  vertical-align: middle;
+}
+.aboutpage .dinfo .text {
+  vertical-align: top;
+  display: inline-block;
+  width: calc(100% - 120px);
+  font-family: "Lato-Regular";
+}
+.aboutpage .dinfo .text a {
+  vertical-align: middle;
+  display: inline;
+}
+footer.about {
+  left: 240px;
+  width: calc(100% - 240px);
+}
+footer.about span {
+  background: #ff5252;
+}
+@media only screen and (max-width: 1024px) {
+  footer.about {
+    left: 0;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 720px) {
+  body {
+    font-size: 14px;
+  }
 }

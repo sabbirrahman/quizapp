@@ -1,0 +1,22 @@
+<table class="table mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th class="text-right">ID</th>
+      <th class="text-right">Batch</th>
+      <th class="text-right">Score</th>
+      <th class="text-right">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="participant in participants">
+      <td class="text-center">{{$index+1 | ordinal}}</td>
+      <td>{{participant.name}}</td>
+      <td class="text-right">{{participant.student_id}}</td>
+      <td class="text-right">{{participant.batch}}</td>
+      <td class="text-right">{{participant.score | limitTo:50}}</td>
+      <td class="text-right">{{participant.time}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,20 +1,20 @@
-<table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+<table class="table mdl-shadow--2dp">
     <thead>
         <tr>
-            <th class="mdl-data-table__cell--non-numeric">Name</th>
-            <th class="mdl-data-table__cell--non-numeric">eMail</th>
-            <th>ID</th>
-            <th>Batch</th>
-            <th>Department</th>
+            <th>Name</th>
+            <th>eMail</th>
+            <th class="text-right">ID</th>
+            <th class="text-right">Batch</th>
+            <th class="text-right">Department</th>
         </tr>
     </thead>
     <tbody>
       <tr ng-repeat="student in students">
-          <td class="mdl-data-table__cell--non-numeric">{{student.name}}</td>
-          <td class="mdl-data-table__cell--non-numeric">{{student.email}}</td>
-          <td>{{student.student_id}}</td>
-          <td>{{student.batch}}</td>
-          <td>{{student.department}}</td>
+          <td><a href="#/student/{{student.id}}">{{student.name}}</a></td>
+          <td>{{student.email}}</td>
+          <td class="text-right">{{student.student_id}}</td>
+          <td class="text-right">{{student.batch}}</td>
+          <td class="text-right">{{student.department}}</td>
       </tr>
     </tbody>
 </table>

@@ -4,6 +4,8 @@
       <th>Title</th>
       <th class="text-right">Date &amp Time</th>
       <th class="text-right">Duration</th>
+      <th class="text-right">Score</th>
+      <th class="text-right">Time</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +15,8 @@
       </td>
       <td class="text-right">{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
       <td class="text-right">{{quiz.duration | hourminute}}</td>
+      <td class="text-right">{{quiz.score}}</td>
+      <td class="text-right">{{quiz.time}}</td>
     </tr>
   </tbody>
 </table>

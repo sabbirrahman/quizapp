@@ -1,33 +1,32 @@
-<div class="container-fluid">
+<div class="container-fluid questionform">
 	<div class="row">
-		<div class="col-lg-6 box mdl-shadow--2dp">
+		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 box mdl-shadow--2dp">
 			<form ng-submit="">
-				<div class="mdl-textfield mdl-js-textfield">
-					<input class="mdl-textfield__input" ng-model="quiz.title" type="text" id="title" placeholder="Title" />
-					<label class="mdl-textfield__label" for="title"></label>
+			  	<div class="mdl-textfield mdl-js-textfield">
+			    	<textarea class="mdl-textfield__input" ng-model="question.question" type="text" rows="3" id="question" placeholder="Question"></textarea>
+			    	<label class="mdl-textfield__label" for="question"></label>
 			  	</div>
 
+				<label ng-if="question.option.length">Options</label>
 				<div class="row">
-					<div class="col-md-6">
-						<div id="datetimepicker2" class="mdl-textfield mdl-js-textfield input-append" style="position:relative;">
-    						<input class="mdl-textfield__input date_time" data-format="hh:mm, dd-MM-yyyy" type="text" ng-model="quiz.date_time" id="date_time" placeholder="Date &amp Time">
-							<label class="mdl-textfield__label" for="date_time"></label>
-						    <span class="add-on" style="position:absolute;right:0;top:25px">
-						      	<i style="cursor:pointer" data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i>
-						    </span>
+					<div class="option col-xs-12" ng-repeat="option in question.options">
+					  	<div mdl-upgrade class="mdl-textfield mdl-js-textfield" ng-show="editMode == option.id">
+					    	<input class="mdl-textfield__input" type="text" id="t{{option.id}}" ng-model="option.option" ng-keydown="optionUpdate($event, option)">
+					    	<label class="mdl-textfield__label" for="t{{option.id}}"></label>
 					  	</div>
-					</div>
-					<div class="col-md-6">
-						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" ng-model="quiz.duration" type="number" id="duration" placeholder="Duration" />
-							<label class="mdl-textfield__label" for="duration"></label>
-					  	</div>	
+						<label mdl-upgrade class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{option.id}}" ng-hide="editMode == option.id">
+							<input type="radio" id="{{option.id}}" class="mdl-radio__button" name="options" value="{{option.id}}" ng-model="question.correct_answer_id">
+							<span class="mdl-radio__label" ng-dbclick="changeEditMode(option.id)" >{{option.option}}</span>
+						</label>
+
+						<i class="material-icons" ng-click="changeEditMode(option.id)" style="right:30px" ng-hide="editMode == option.id">edit</i>
+						<i class="material-icons" ng-click="optionDelete($index)">delete</i>
 					</div>
 				</div>
 
-			  	<div class="mdl-textfield mdl-js-textfield">
-			    	<textarea class="mdl-textfield__input" ng-model="quiz.description" type="text" rows="3" id="description" placeholder="Description"></textarea>
-			    	<label class="mdl-textfield__label" for="description"></label>
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" ng-model="newOpt" type="text" id="newOption" placeholder="Add an option" ng-keydown="optionCreate($event, newOption)" />
+					<label class="mdl-textfield__label" for="newOption"></label>
 			  	</div>
 				
 				<div ng-if="!id">
@@ -41,11 +40,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	$(function() {
-		$('#datetimepicker2').datetimepicker({
-			language: 'en',
-			pick12HourFormat: true
-		});
-	});
-</script>

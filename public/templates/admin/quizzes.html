@@ -1,20 +1,20 @@
-<table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+<table class="table table-hover mdl-shadow--2dp">
     <thead>
         <tr>
-            <th class="mdl-data-table__cell--non-numeric">Title</th>
-            <th>Date &amp Time</th>
-            <th>Duration</th>
+            <th>Title</th>
+            <th class="text-right">Date &amp Time</th>
+            <th class="text-right">Duration</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
       <tr ng-repeat="quiz in quizzes">
-          <td class="mdl-data-table__cell--non-numeric">
+          <td>
             <a href="#/quiz/{{quiz.id}}/questions">{{quiz.title}}</a>
           </td>
-          <td>{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
-          <td>{{quiz.duration}} Hour<span ng-if="quiz.duration > 1">s</span></td>
-          <td>
+          <td class="text-right">{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
+          <td class="text-right">{{quiz.duration | hourminute }}</span></td>
+          <td class="icons text-right">
               <a href="#/quiz/edit/{{quiz.id}}"><i class="material-icons clickable">mode_edit</i></a>
               <i class="material-icons clickable" ng-click="destroy($index)">delete</i>
           </td>
