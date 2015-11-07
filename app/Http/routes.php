@@ -19,6 +19,7 @@ Route::bind('students', function($value, $route){
 	return App\Models\Student::whereId($value)->first();
 });
 
+
 // Pages Routes
 Route::get('/', 'PageController@index');
 Route::get('admin', [
@@ -32,40 +33,54 @@ Route::get('student', [
 	'middleware' => 'student'
 ]);
 
+
 // Authentication Routes...
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
 
 // Registration Routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::controllers(['password' => 'Auth\PasswordController']);
 
+
 // Admin APIs
 Route::group(['prefix' => 'api/admin/', 'middleware' => 'admin'], function(){
 
+	// Quiz
 	Route::resource('quizzes', 					 'QuizController', ['except' => ['create', 'edit']]);
-	Route::get('quizzes/{quizzes}/participants', 'QuizController@quizParticipants');
+	Route::get('quizzes/{quizzes}/participants', 'QuizController@participants');
 	
+	// Question of Quiz
 	Route::resource('quizzes.questions', 'QuestionController', ['except' => ['create', 'edit']]);
 	
+	// Option of Quiz
 	Route::resource('questions.options', 'OptionController', ['only' => ['store', 'update', 'destroy']]);
 	
+	// Student
 	Route::resource('students', 			  'StudentController', ['except' => ['create', 'edit']]);
-	Route::get('students/{students}/quizzes', 'StudentController@studentQuizzes');
+	Route::get('students/{students}/quizzes', 'StudentController@quizzes');
 
 });
 
 // Student APIs
 Route::group(['prefix' => 'api/student/', 'middleware' => 'student'], function(){
 	
+	// Quiz
 	Route::resource('quizzes', 'QuizController', ['only' => ['index', 'show']]);
+	Route::get('quizzes/{quizzes}/participate/{students}', 'QuizController@participate');
+	
+	// Question of Quiz
 	Route::resource('quizzes.questions', 'QuestionController', ['only' => ['index', 'show']]);
-	Route::get('participate/{quizzes}', 'StudentController@participate');
+	
+	// Answer of Quiz
+	Route::resource('quizzes.answers'					, 'AnswerController'  , ['only' => ['index', 'store']]);
+	Route::resource('quizzes/{quizzes}/correctanswers'  , 'AnswerController@correctAnswers');
 
-	Route::post('answers', 'StudentController@postStudentAnswers');
-	Route::get('answers/{quizzes}', 'StudentController@getStudentAnswers');
-	Route::get('myquizzes', 'StudentController@studentQuizzes');
-	Route::get('score/{quizzes}', 'StudentController@studentScore');
+	// Student
+	Route::resource('students'						, 'StudentController', ['only' => ['show']]);
+	Route::get('students/{students}/quizzes'		, 'StudentController@quizzes');
+	Route::get('students/{students}/score/{quizzes}', 'StudentController@score');
 
 });

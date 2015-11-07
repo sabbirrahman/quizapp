@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use DateTime;
 use App\Models\Quiz;
@@ -46,7 +47,7 @@ class QuizController extends Controller
         $quiz->delete();
     }
     
-    public function quizParticipants(Quiz $quiz) {
+    public function participants(Quiz $quiz) {
         $participants = $quiz->participants()->get();
         foreach ($participants as $participant) {
             $participant['name' ] = $participant->user()->first()->name;
@@ -54,5 +55,22 @@ class QuizController extends Controller
             $participant['time' ] = $participant->scores()->whereQuizId($quiz->id)->first()->time;
         }
         return $participants;
+    }
+
+
+
+    public function participate(Quiz $quiz, Student $student) {
+        if(new DateTime($quiz->date_time) < new DateTime) return;
+        $r = DB::table('quiz_student')->whereStudentIdAndQuizId($student->id, $quiz->id)->first();
+        if($r) {
+            DB::table('quiz_student')->whereStudentIdAndQuizId($student->id, $quiz->id)->delete();
+            return 0;
+        } else {
+            DB::table('quiz_student')->insert([
+                'student_id' => $student->id,
+                'quiz_id'    => $quiz->id
+            ]);
+            return 1;
+        }
     }
 }

@@ -31,6 +31,7 @@
                 <div ng-view></div>
             </div>
         </main>
+        <input type="hidden" ng-init="student_id = {{Auth::user()->student()->first()->id}}">
     </div>
 @endsection
 

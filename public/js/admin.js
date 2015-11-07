@@ -66,14 +66,21 @@ angular
 	}])
 
 	.controller('MainController', ['$scope', function($scope){
-
+		$(document).click(function(ev) {
+			if($(ev.target).parents('.mdl-layout__header').length > 0 ||
+			   $(ev.target).parents('.mdl-layout__drawer').length > 0 ||
+			   $(ev.target).hasClass('mdl-layout__drawer')) return;
+			$(".mdl-layout__drawer").removeClass("is-visible");
+		});
 	}])
 
 
 	/* Quiz Controllers */
-	.controller('QuizzesController', ['$scope', 'Quiz',
-		function($scope, Quiz){
-			$scope.quizzes = Quiz.query();
+	.controller('QuizzesController', ['$scope', '$filter', 'Quiz',
+		function($scope, $filter, Quiz){
+			$scope.quizzes = Quiz.query(function(){
+				$scope.quizzes = $filter('orderBy')($scope.quizzes, 'date_time', true);
+			});
 			$scope.destroy = function(index) {
 				Quiz.delete($scope.quizzes[index]);
 				$scope.quizzes.splice(index, 1);
@@ -232,15 +239,29 @@ angular
     	return function(input) {
         	return Date.parse(input);;
     	}
-	})
+    })
 	.filter("hourminute", function () {
     	return function(input) {
     		var h = Math.floor(input/60);
-    		var m = input%60;
+    		var m = Math.floor(input%60);
     		var output = "";
     		output += h ? h+' h' : '';
     		output += h&&m ? ' ' : '';
     		output += m ? m+' m' : '';
+        	return output;
+    	}
+	})
+	.filter("hourminutesecond", function () {
+    	return function(input) {
+    		var h = Math.floor(input/3600); input %= 3600;
+    		var m = Math.floor(input/60);   input %= 60;
+    		var s = Math.floor(input);
+    		var output = "";
+    		output += h ? h+' h' : '';
+    		output += h&&m ? ' ' : '';
+    		output += m ? m+' m' : '';
+    		output += (h&&s) || (m&&s) ? ' ' : '';
+    		output += s ? s+' s' : '';
         	return output;
     	}
 	});

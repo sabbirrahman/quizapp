@@ -16,7 +16,7 @@
       <td class="text-right">{{participant.student_id}}</td>
       <td class="text-right">{{participant.batch}}</td>
       <td class="text-right">{{participant.score | limitTo:50}}</td>
-      <td class="text-right">{{participant.time}}</td>
+      <td class="text-right">{{participant.time | hourminutesecond}}</td>
     </tr>
   </tbody>
 </table>

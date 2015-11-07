@@ -15,7 +15,7 @@
       <td class="text-right">{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
       <td class="text-right">{{quiz.duration | hourminute}}</td>
       <td class="icons text-right">
-        <i class="material-icons clickable" ng-click="participate($index)">{{quiz.participated?'star':'star_border'}}</i>
+        <i class="material-icons">{{quiz.participated?'star':'star_border'}}</i>
       </td>
     </tr>
   </tbody>

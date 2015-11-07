@@ -1,5 +1,5 @@
 <div class="score mdl-shadow--2dp">
-  <span>You have scored {{score.score}} point{{score.score>1?'s':''}} out of {{questions.length}} point{{score.score>1?'s':''}} within {{score.time}}</span>
+  <span>You have scored {{score.score}} point{{score.score>1?'s':''}} out of {{questions.length}} point{{score.score>1?'s':''}} within {{score.time | hourminutesecond}}</span>
   <br>
   <span>Check bellow for the correct answers and your answers</span>
 </div>
@@ -17,7 +17,7 @@
       <td class="icons text-center">
         <i class="material-icons" ng-class="{'text-danger': question.answer != question.correct_answer}">{{question.answer == question.correct_answer? 'mood':'mood_bad'}}</i>
       </td>
-      <td>{{question.question | limitTo:50}} <span ng-show="question.question.length > 50">...</span></td>
+      <td>{{question.question}}</td>
       <td class="text-right">{{question.answer}}</td>
       <td class="text-right">{{question.correct_answer}}</td>
     </tr>

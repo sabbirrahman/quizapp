@@ -12,7 +12,7 @@
           <td>
             <a href="#/quiz/{{quiz.id}}/questions">{{quiz.title}}</a>
           </td>
-          <td class="text-right">{{quiz.date_time | asDate| date:"h:mm a, MMM d, yyyy"}}</td>
+          <td class="text-right">{{quiz.date_time | asDate | date:"h:mm a, MMM d, yyyy"}}</td>
           <td class="text-right">{{quiz.duration | hourminute }}</span></td>
           <td class="icons text-right">
               <a href="#/quiz/edit/{{quiz.id}}"><i class="material-icons clickable">mode_edit</i></a>
