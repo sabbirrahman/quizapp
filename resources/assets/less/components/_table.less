@@ -1,8 +1,42 @@
-.table.mdl-data-table {
-	th, td {
-		vertical-align: middle;
-		a {
-			color: rgb(55, 55, 55);
+.table {
+	.whiteBg(1);
+	thead {
+		tr {
+			th {
+				font-weight: 100;
+				font-family: @font6;
+				padding: 15px 30px;
+				font-size: 13px;
+				vertical-align: middle;
+				.blackTx(0.5);
+			}
+		}
+	}
+	tbody {
+		tr {
+			td {
+				padding: 15px 30px;
+				font-size: 14px;
+				font-family: @font6;
+				vertical-align: middle;
+				.blackTx(1);
+				a {
+					padding: 0;
+					.blackTx(1);
+					&:hover {
+						.secondaryTx(1);
+					}
+				}
+			}
+			td.icons {
+				padding: 0px 30px;
+				i {
+					.blackTx(1);
+					&:hover {
+						.secondaryTx(1);
+					}
+				}
+			}
 		}
 	}
 }
