@@ -6,6 +6,8 @@ class Option extends Model
 {
     protected $table = 'options';
 
+    protected $fillable = [ 'option', 'question_id' ];
+
     public function correctAnswer() {
     	return $this->hasOne('App\Models\CorrectAnswer');
     }

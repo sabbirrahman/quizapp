@@ -6,6 +6,8 @@ class Answer extends Model
 {
     protected $table = 'answers';
 
+    protected $fillable = ['student_id', 'question_id', 'option_id'];
+
     public function question() {
     	return $this->belongsTo('App\Models\Question');
     }

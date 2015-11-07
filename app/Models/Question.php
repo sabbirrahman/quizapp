@@ -6,7 +6,7 @@ class Question extends Model
 {
     protected $table = 'questions';
 
-    protected $fillable = ['questions', 'type'];
+    protected $fillable = ['question', 'type', 'quiz_id'];
 
     public function options() {
     	return $this->hasMany('App\Models\Option');

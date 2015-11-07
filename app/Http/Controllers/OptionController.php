@@ -1,7 +1,8 @@
-<?php namespace App\Http\Conrollers;
+<?php namespace App\Http\Controllers;
 
 use App\Models\Option;
-use App\Models\Request\OptionRequest;
+use App\Models\Question;
+use App\Http\Requests\OptionRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -9,26 +10,17 @@ use App\Http\Controllers\Controller;
 class OptionController extends Controller
 {
 
-    public function index()
-    {
-        return Option::all()->toJson();        
-    }
-
     public function store(OptionRequest $request)
     {
-        Option::create($request->all());
+        return Option::create($request->all());
+    }
+    
+    public function update(Question $question, Option $option, OptionRequest $request)
+    {
+        $option->update($request->all());
     }
 
-    public function show(Option $option)
-    {
-        return $option->toJson();
-    }
-
-    public function update(OptionRequest $request, Option $option)
-    {
-        $option::update($request->all());
-    }
-    public function destroy(Option $option)
+    public function destroy(Question $question, Option $option)
     {
         $option->delete();
     }

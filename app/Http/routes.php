@@ -43,12 +43,29 @@ Route::controllers(['password' => 'Auth\PasswordController']);
 
 // Admin APIs
 Route::group(['prefix' => 'api/admin/', 'middleware' => 'admin'], function(){
-	Route::resource('quizzes', 'QuizController', ['except' => ['create', 'edit']]);
+
+	Route::resource('quizzes', 					 'QuizController', ['except' => ['create', 'edit']]);
+	Route::get('quizzes/{quizzes}/participants', 'QuizController@quizParticipants');
+	
 	Route::resource('quizzes.questions', 'QuestionController', ['except' => ['create', 'edit']]);
-	Route::resource('students', 'StudentController', ['except' => ['create', 'edit']]);
+	
+	Route::resource('questions.options', 'OptionController', ['only' => ['store', 'update', 'destroy']]);
+	
+	Route::resource('students', 			  'StudentController', ['except' => ['create', 'edit']]);
+	Route::get('students/{students}/quizzes', 'StudentController@studentQuizzes');
+
 });
 
 // Student APIs
 Route::group(['prefix' => 'api/student/', 'middleware' => 'student'], function(){
+	
+	Route::resource('quizzes', 'QuizController', ['only' => ['index', 'show']]);
+	Route::resource('quizzes.questions', 'QuestionController', ['only' => ['index', 'show']]);
+	Route::get('participate/{quizzes}', 'StudentController@participate');
+
+	Route::post('answers', 'StudentController@postStudentAnswers');
+	Route::get('answers/{quizzes}', 'StudentController@getStudentAnswers');
+	Route::get('myquizzes', 'StudentController@studentQuizzes');
+	Route::get('score/{quizzes}', 'StudentController@studentScore');
 
 });
