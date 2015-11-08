@@ -88,8 +88,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'log' => [
+            'required' => 'Username or email required.',
         ],
     ],
 

@@ -282,6 +282,14 @@ footer span a {
 footer span a:hover {
   color: #a6a6a6;
 }
+.noid {
+  font-family: "Lato-Bold";
+  font-size: 14px;
+}
+.noid .form-toggle {
+  color: #ff5252;
+  cursor: pointer;
+}
 @media only screen and (max-width: 720px) {
   .homepage {
     background-size: auto 100%;
@@ -362,6 +370,11 @@ div[ng-view] {
 }
 .box {
   background: #ffffff;
+}
+h3 {
+  font-size: 22px;
+  padding: 0px;
+  margin: 0px;
 }
 .floating-button {
   position: fixed;
@@ -483,7 +496,6 @@ div[ng-view] {
 }
 .aboutpage h3 {
   font-family: "Lato-Bold";
-  padding: 10px 0px;
   margin: 0;
 }
 .aboutpage p {
@@ -540,6 +552,11 @@ footer.about span {
 }
 .errors .text-danger {
   font-size: 12px;
+  font-family: "Lato-Regular";
+  font-style: italic;
+}
+.incomplete {
+  font-size: 16px;
   font-family: "Lato-Regular";
   font-style: italic;
 }

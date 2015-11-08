@@ -28,6 +28,7 @@
 	@yield('main')
 
 	<script src='js/library.js'></script>
+    <script src='js/templates.js'></script>
 	@yield('scripts')
 </body>
 

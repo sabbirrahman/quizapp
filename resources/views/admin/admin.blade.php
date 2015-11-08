@@ -38,5 +38,4 @@
 
 @section('scripts')
 	<script src='js/admin.js'></script>
-	<script src='js/templates.js'></script>
 @endsection

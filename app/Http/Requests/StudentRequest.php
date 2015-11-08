@@ -25,8 +25,8 @@ class StudentRequest extends Request
     {
         return [
             'name'       => 'required | max:50',
-            'email'      => 'required | email',
-            'student_id' => 'required | max:15',
+            'email'      => 'required | email | unique:users,email,'.Request::get('user_id'),
+            'student_id' => 'required | max:15 | unique:students,student_id,'.Request::get('id'),
             'batch'      => 'required | numeric',
             'department' => 'required | max:50'
         ];

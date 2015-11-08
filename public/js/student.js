@@ -1,6 +1,12 @@
-var atu = 'templates/student/';
+var atu = 'student/';
 angular
-	.module('quizapp-student', ['ngRoute', 'ngResource', 'ngAnimate', 'angular-flipclock', 'mdl', 'templates'])
+	.module('quizapp-student', ['ngRoute',
+								'ngResource',
+								'ngAnimate',
+								'angular-flipclock',
+								'mdl',
+								'templates'
+								])
 	.run(['$rootScope', '$timeout', function ($rootScope, $timeout) {
 		$rootScope.$on('$viewContentLoaded', function() {
 			$timeout(function() {
@@ -16,8 +22,8 @@ angular
 			.when('/stats', 			{ templateUrl: atu+'stats.html'    	 , controller: 'StatsController'    })
 			.when('/stats/:id', 		{ templateUrl: atu+'stat.html'     	 , controller: 'StatController'     })
 			.when('/result/:id', 		{ templateUrl: atu+'stat.html'     	 , controller: 'ResultController'   })
-			.when('/settings', 			{ templateUrl: 'templates/settings.html', controller: 'SettingsController' })
-			.when('/about', 			{ templateUrl: 'templates/about.html'   , controller: 'MainController'     })
+			.when('/settings', 			{ templateUrl: 'settings.html', controller: 'SettingsController' })
+			.when('/about', 			{ templateUrl: 'about.html'   , controller: 'MainController'     })
 			.otherwise( { redirectTo: '/'});
         mdlConfigProvider.floating = false;
 	}])
@@ -56,14 +62,23 @@ angular
 	}])
 
 
-	.controller('MainController', ['$scope', function($scope){
-		$(document).click(function(ev) {
-			if($(ev.target).parents('.mdl-layout__header').length > 0 ||
-			   $(ev.target).parents('.mdl-layout__drawer').length > 0 ||
-			   $(ev.target).hasClass('mdl-layout__drawer')) return;
-			$(".mdl-layout__drawer").removeClass("is-visible");
-		});
-	}])
+	.controller('MainController', ['$scope', '$location', 'Student',
+		function($scope, $location, Student){
+			if($scope.student_id) {
+				$student = Student.get({id:$scope.student_id}, function(){
+					if(!$student.student_id || !$student.batch || !$student.department) {
+						$location.path('settings');
+					}
+				});
+			}
+			$(document).click(function(ev) {
+				if($(ev.target).parents('.mdl-layout__header').length > 0 ||
+				   $(ev.target).parents('.mdl-layout__drawer').length > 0 ||
+				   $(ev.target).hasClass('mdl-layout__drawer')) return;
+				$(".mdl-layout__drawer").removeClass("is-visible");
+			});
+		}
+	])
 
 
 	/* Quiz Controllers */
@@ -226,14 +241,29 @@ angular
 	// Settings Controller
 	.controller('SettingsController', ['$scope', 'Student', 'User',
 		function($scope, Student, User){
-			$scope.user = Student.get({id: $scope.student_id});
+			$scope.user = Student.get({id: $scope.student_id}, function(){
+				$scope.errors = {};
+				if(!$scope.user.student_id)
+					$scope.errors.student_id = ['The student id field is required.'];
+				
+				if(!$scope.user.batch)
+					$scope.errors.batch = ['The batch field is required.'];
+				
+				if(!$scope.user.department)
+					$scope.errors.department = ['The department id field is required.']
+
+				if(!$scope.user.student_id || !$scope.user.batch || !$scope.user.department)
+					$scope.incomplete = true;
+			});
+
+
 
 			$scope.update = function() {
 				$scope.errors   = undefined;
 				$scope.successi = undefined;
 				$scope.successp = undefined;
 				$scope.user.$update(
-					function(res) { $scope.success = true;     },
+					function(res) { $scope.successi = true; $scope.incomplete = false; },
 					function(err) { $scope.errors  = err.data; }
 				);
 			}

@@ -1,4 +1,4 @@
-var atu = 'templates/admin/';
+var atu = 'admin/';
 angular
 	.module('quizapp-admin', [	'ngRoute',
 								'ngResource',
@@ -33,8 +33,8 @@ angular
 			.when('/stats',     { templateUrl: atu+'stats.html'      , controller: 'StatsController' })
 			.when('/stats/:id', { templateUrl: atu+'stat.html'       , controller: 'StatController'  })
 			// Other Routes
-			.when('/settings',  { templateUrl: 'templates/settings.html', controller: 'SettingsController'})
-			.when('/about',     { templateUrl: 'templates/about.html'   , controller: 'MainController'    })
+			.when('/settings',  { templateUrl: 'settings.html', controller: 'SettingsController'})
+			.when('/about',     { templateUrl: 'about.html'   , controller: 'MainController'    })
 			.otherwise( { redirectTo: '/'});
         mdlConfigProvider.floating = false;
 	}])
@@ -272,8 +272,8 @@ angular
 				$scope.successi = undefined;
 				$scope.successp = undefined;
 				$scope.user.$update(
-					function(res) { $scope.success = true;     },
-					function(err) { $scope.errors  = err.data; }
+					function(res) { $scope.successi = true;     },
+					function(err) { $scope.errors   = err.data; }
 				);
 			}
 

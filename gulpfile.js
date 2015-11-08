@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var templateCache = require('gulp-angular-templatecache');
  
-gulp.task('default', function () {
+gulp.task('templateCache', function () {
   return gulp.src('public/templates/**/*.html')
     .pipe(templateCache())
     .pipe(gulp.dest('public/js'));
@@ -23,8 +23,6 @@ elixir.config.sourcemaps = false;
 
 elixir(function(mix) {
   mix.less(["styles.less" ], "public/css/styles.css",  "resources/assets/");
-  //mix.less(["admin.less"  ], "public/css/admin.css",   "resources/assets/");
-  //mix.less(["student.less"], "public/css/student.css", "resources/assets/");
 
   mix.styles([
     "bootstrap/dist/css/bootstrap.min.css",

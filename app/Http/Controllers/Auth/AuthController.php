@@ -2,6 +2,7 @@
 
 use Validator;
 use App\Models\User;
+use App\Models\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -33,13 +34,15 @@ class AuthController extends Controller {
 
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name'     => $data['name'],
             'username' => $data['username'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
             'role'     => 'student'
         ]);
+        Student::create(['user_id' => $user->id]);
+        return $user;
     }
 
     public function getLogin()
