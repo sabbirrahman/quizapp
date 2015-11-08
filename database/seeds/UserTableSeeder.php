@@ -34,11 +34,11 @@ class UsersTableSeeder extends Seeder {
         ]);
 
         User::create([
-            'email'    => 'marzia@gmail.com',
-            'username' => 'marzia',
-            'name'     => 'Shaika Sayed Marzia',
+            'email'    => 'mehedi@gmail.com',
+            'username' => 'mehedi',
+            'name'     => 'Mehedi Hasan Bhuiyan',
             'role'     => 'student',
-            'password' => bcrypt('marzia'),
+            'password' => bcrypt('mehedi'),
         ]);
     }
 }

@@ -24,7 +24,7 @@ class StudentsTableSeeder extends Seeder
         ]);
 
         Student::create([
-            'student_id' => 'F21132111004',
+            'student_id' => 'M21132111003',
             'batch'      => '26',
             'department' => 'English',
             'user_id'    => '4'

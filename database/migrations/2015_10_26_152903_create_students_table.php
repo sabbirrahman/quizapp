@@ -14,9 +14,9 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('student_id', 12);
-            $table->integer('batch', false, true, 3);
-            $table->string('department', 15)->default('CSE');
+            $table->string('student_id', 12)->nullable();
+            $table->integer('batch', false, true, 3)->nullable();
+            $table->string('department', 15)->nullable();
             $table->integer('user_id', false, true)->unsigned();
             $table->timestamps();
 
