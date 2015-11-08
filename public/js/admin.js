@@ -33,7 +33,8 @@ angular
 			.when('/stats',     { templateUrl: atu+'stats.html'      , controller: 'StatsController' })
 			.when('/stats/:id', { templateUrl: atu+'stat.html'       , controller: 'StatController'  })
 			// Other Routes
-			.when('/about',     { templateUrl: 'templates/about.html', controller: 'MainController'  })
+			.when('/settings',  { templateUrl: atu+'settings.html',    controller: 'SettingsController'})
+			.when('/about',     { templateUrl: 'templates/about.html', controller: 'MainController'    })
 			.otherwise( { redirectTo: '/'});
         mdlConfigProvider.floating = false;
 	}])
@@ -64,6 +65,14 @@ angular
   			quizzes: { method:"GET", url:"api/admin/students/:id/quizzes", isArray:true }
   		});
 	}])
+	
+	.factory("User", ["$resource", function($resource) {
+  		return $resource("api/admin/users/:id", {id:'@id'}, {
+  			update: { method:"PUT" },
+  			updatePassword: { method:"POST", url:"api/admin/users/:id/updatepassword", isArray:false }
+  		});
+	}])
+	
 
 	.controller('MainController', ['$scope', function($scope){
 		$(document).click(function(ev) {
@@ -232,6 +241,32 @@ angular
 					return 0;
 				});
 			});
+		}
+	])
+
+
+	// Settings Controller
+	.controller('SettingsController', ['$scope', 'User',
+		function($scope, User){
+			$scope.user = User.get({id: $scope.user_id});
+
+			$scope.update = function() {
+				$scope.user.$update();
+			}
+
+			$scope.updatePassword = function(){
+				$scope.errors = undefined;
+				User.updatePassword({id: $scope.user_id}, $scope.password,
+					function(res){
+						if(res == 'false') {
+						$scope.errors = { old_password: ["The old password doesn't match our record!"]}
+					} else {
+						$scope.success = "Password changed successfully!";
+					}
+				 }, function(err){
+					$scope.errors = err;
+				});
+			};
 		}
 	])
 

@@ -66,7 +66,7 @@
                             <!-- <input type="hidden" name="log" value="IDONTKNOW"> -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="log" name="log" value="{{ old('log') }}"/>
+                                <input class="mdl-textfield__input" type="log" id="log" name="log" value="{{ old('log') }}"/>
                                 <label class="mdl-textfield__label" for="log">email or username</label>
                             </div>
 

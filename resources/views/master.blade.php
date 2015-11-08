@@ -24,7 +24,6 @@
 </head>
 
 <body class="">
-	<div class="bg2"></div>
 
 	@yield('main')
 

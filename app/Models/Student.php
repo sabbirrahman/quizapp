@@ -6,6 +6,8 @@ class Student extends Model
 {
     protected $table = 'students';
 
+    protected $fillable = ['student_id', 'batch', 'department'];
+
     public function user() {
     	return $this->belongsTo('App\Models\User');
     }

@@ -1,10 +1,8 @@
-<?php
-
-namespace App\Http\Requests;
+<?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class StudentRequest extends Request
+class UserRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

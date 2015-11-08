@@ -29,17 +29,17 @@ angular
   			participate: { url:"api/student/quizzes/:quiz_id/participate/:student_id", isArray:false }
   		});
 	}])
-	
+
 	.factory("Question", ["$resource", function($resource) {
   		return $resource("api/student/quizzes/:quiz_id/questions/:id", {quiz_id:'@quiz_id', id:'@id'});
 	}])
-	
+
 	.factory("Answer", ["$resource", function($resource) {
   		return $resource("api/student/quizzes/:quiz_id/answers/", {quiz_id:'@quiz_id'}, {
   			correctAnswers: { url: 'api/student/quizzes/:quiz_id/correctanswers', isArray:true }
   		});
 	}])
-	
+
 	.factory("Student", ["$resource", function($resource) {
   		return $resource("api/student/students/:id", {id:'@id'}, {
   			update: { method : "PUT" },
@@ -47,6 +47,14 @@ angular
   			score: { url:"api/student/students/:student_id/score/:quiz_id", isArray:false }
   		});
 	}])
+	
+	.factory("User", ["$resource", function($resource) {
+  		return $resource("api/admin/users/:id", {id:'@id'}, {
+  			update: { method:"PUT" },
+  			updatePassword: { method:"POST", url:"api/student/users/:id/updatepassword", isArray:false }
+  		});
+	}])
+
 
 	.controller('MainController', ['$scope', function($scope){
 		$(document).click(function(ev) {
@@ -197,7 +205,7 @@ angular
 
 			$scope.score = angular.fromJson(localStorage.score);
 			$scope.score.time = (Date.parse($scope.score.endTime) - Date.parse($scope.score.startTime))/1000;
-			
+
 			$scope.correctAnswers = Answer.correctAnswers({quiz_id: $scope.quiz_id}, function() {
 				$scope.score.score = 0;
 				for(var i = 0; i < $scope.questions.length; i++) {
@@ -216,11 +224,48 @@ angular
 
 
 	// Settings Controller
-	.controller('SettingsController', ['$scope', 'Student',
-		function($scope, Student){
+	.controller('SettingsController', ['$scope', 'Student', 'User',
+		function($scope, Student, User){
+			$scope.student = Student.get({id: $scope.student_id});
+
+			$scope.update = function() {
+				$scope.student.$update();
+			}
+
+			$scope.updatePassword = function(){
+				$scope.errors = undefined;
+				User.updatePassword({id: $scope.user_id}, $scope.password,
+					function(res){
+						if(res == 'false') {
+						$scope.errors = { old_password: ["The old password doesn't match our record!"]}
+					} else {
+						$scope.success = "Password changed successfully!";
+					}
+				 }, function(err){
+					$scope.errors = err;
+				});
+			};
 		}
 	])
-	
+
+	/* Directive */
+	.directive('error', function() {
+		return {
+    		restrict: 'E',
+        	scope: { errors: '=' },
+			template: `
+				<div class="form-group" ng-show="errors">
+					<div class="col-xs-offset-3 col-xs-9">
+						<div class="alert alert-danger repeat-animation" ng-repeat="msg in errors"> {{msg}}</div>
+					</div>
+				</div>
+			`
+		};
+	})
+	/* End of Directive */
+
+
+	/* Filters */
 	.filter("asDate", function () {
     	return function(input) {
         	return Date.parse(input);;
@@ -251,3 +296,4 @@ angular
         	return output;
     	}
 	});
+	/* End of Filters */

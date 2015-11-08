@@ -5,6 +5,7 @@ Route::model('quizzes'  , 'App\Models\Quiz'     );
 Route::model('questions', 'App\Models\Question' );
 Route::model('options'  , 'App\Models\Option'   );
 Route::model('students' , 'App\Models\Student'  );
+Route::model('user' 	, 'App\Models\User'  	);
 
 Route::bind('quizzes', function($value, $route){
 	return App\Models\Quiz::whereId($value)->first();
@@ -17,6 +18,9 @@ Route::bind('options', function($value, $route){
 });
 Route::bind('students', function($value, $route){
 	return App\Models\Student::whereId($value)->first();
+});
+Route::bind('users', function($value, $route){
+	return App\Models\User::whereId($value)->first();
 });
 
 
@@ -62,6 +66,10 @@ Route::group(['prefix' => 'api/admin/', 'middleware' => 'admin'], function(){
 	Route::resource('students', 			  'StudentController', ['except' => ['create', 'edit']]);
 	Route::get('students/{students}/quizzes', 'StudentController@quizzes');
 
+	// User
+	Route::resource('users', 'UserController', ['only' => ['show', 'update']]);
+	Route::post('users/{users}/updatepassword', 'UserController@updatePassword');
+
 });
 
 // Student APIs
@@ -79,8 +87,11 @@ Route::group(['prefix' => 'api/student/', 'middleware' => 'student'], function()
 	Route::resource('quizzes/{quizzes}/correctanswers'  , 'AnswerController@correctAnswers');
 
 	// Student
-	Route::resource('students'						, 'StudentController', ['only' => ['show']]);
+	Route::resource('students'						, 'StudentController', ['only' => ['show', 'update']]);
 	Route::get('students/{students}/quizzes'		, 'StudentController@quizzes');
 	Route::get('students/{students}/score/{quizzes}', 'StudentController@score');
+
+	// User
+	Route::post('users/{users}/updatepassword', 'UserController@updatePassword');
 
 });

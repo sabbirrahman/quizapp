@@ -32,6 +32,7 @@
             </div>
         </main>
         <input type="hidden" ng-init="student_id = {{Auth::user()->student()->first()->id}}">
+        <input type="hidden" ng-init="user_id    = {{Auth::user()->id}}">
     </div>
 @endsection
 
