@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Requests;
+<?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
@@ -24,7 +22,10 @@ class QuizRequest extends Request
     public function rules()
     {
         return [
-            //
+            'title'       => 'required | max:45',
+            'date_time'   => 'required | date',
+            'duration'    => 'required | numeric',
+            'description' => 'max:512'
         ];
     }
 }

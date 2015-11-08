@@ -24,7 +24,7 @@ class QuestionRequest extends Request
     public function rules()
     {
         return [
-            //
+            'question' => 'required | max:512'
         ];
     }
 }

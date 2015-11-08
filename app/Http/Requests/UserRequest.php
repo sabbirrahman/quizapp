@@ -22,7 +22,8 @@ class UserRequest extends Request
     public function rules()
     {
         return [
-            //
+            'name'       => 'required | max:50',
+            'email'      => 'required | email'
         ];
     }
 }

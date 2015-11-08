@@ -535,6 +535,14 @@ footer.about {
 footer.about span {
   background: #ff5252;
 }
+.errors {
+  margin-top: -20px;
+}
+.errors .text-danger {
+  font-size: 12px;
+  font-family: "Lato-Regular";
+  font-style: italic;
+}
 @media only screen and (max-width: 1024px) {
   footer.about {
     left: 0;

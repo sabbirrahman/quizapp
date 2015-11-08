@@ -16,8 +16,8 @@ angular
 			.when('/stats', 			{ templateUrl: atu+'stats.html'    	 , controller: 'StatsController'    })
 			.when('/stats/:id', 		{ templateUrl: atu+'stat.html'     	 , controller: 'StatController'     })
 			.when('/result/:id', 		{ templateUrl: atu+'stat.html'     	 , controller: 'ResultController'   })
-			.when('/settings', 			{ templateUrl: atu+'settings.html'   , controller: 'SettingsController' })
-			.when('/about', 			{ templateUrl: 'templates/about.html', controller: 'MainController'     })
+			.when('/settings', 			{ templateUrl: 'templates/settings.html', controller: 'SettingsController' })
+			.when('/about', 			{ templateUrl: 'templates/about.html'   , controller: 'MainController'     })
 			.otherwise( { redirectTo: '/'});
         mdlConfigProvider.floating = false;
 	}])
@@ -226,23 +226,34 @@ angular
 	// Settings Controller
 	.controller('SettingsController', ['$scope', 'Student', 'User',
 		function($scope, Student, User){
-			$scope.student = Student.get({id: $scope.student_id});
+			$scope.user = Student.get({id: $scope.student_id});
 
 			$scope.update = function() {
-				$scope.student.$update();
+				$scope.errors   = undefined;
+				$scope.successi = undefined;
+				$scope.successp = undefined;
+				$scope.user.$update(
+					function(res) { $scope.success = true;     },
+					function(err) { $scope.errors  = err.data; }
+				);
 			}
 
 			$scope.updatePassword = function(){
-				$scope.errors = undefined;
+				$scope.errors   = undefined;
+				$scope.successi = undefined;
+				$scope.successp = undefined;
 				User.updatePassword({id: $scope.user_id}, $scope.password,
 					function(res){
-						if(res == 'false') {
-						$scope.errors = { old_password: ["The old password doesn't match our record!"]}
-					} else {
-						$scope.success = "Password changed successfully!";
-					}
-				 }, function(err){
-					$scope.errors = err;
+						if(res[0] == 'f') {
+							$scope.errors = { old_password: ["The old password doesn't match our record!"]}
+						} else {
+							$scope.successp = true;
+							$scope.password = [];
+						}
+				 	}
+				  , function(err){
+					$scope.errors = err.data;
+					console.log($scope.errors);
 				});
 			};
 		}
@@ -254,10 +265,8 @@ angular
     		restrict: 'E',
         	scope: { errors: '=' },
 			template: `
-				<div class="form-group" ng-show="errors">
-					<div class="col-xs-offset-3 col-xs-9">
-						<div class="alert alert-danger repeat-animation" ng-repeat="msg in errors"> {{msg}}</div>
-					</div>
+				<div class="errors" ng-show="errors">
+					<span class="text-danger repeat-animation" ng-repeat="msg in errors"> {{msg}}</span>
 				</div>
 			`
 		};

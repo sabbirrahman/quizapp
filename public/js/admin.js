@@ -33,8 +33,8 @@ angular
 			.when('/stats',     { templateUrl: atu+'stats.html'      , controller: 'StatsController' })
 			.when('/stats/:id', { templateUrl: atu+'stat.html'       , controller: 'StatController'  })
 			// Other Routes
-			.when('/settings',  { templateUrl: atu+'settings.html',    controller: 'SettingsController'})
-			.when('/about',     { templateUrl: 'templates/about.html', controller: 'MainController'    })
+			.when('/settings',  { templateUrl: 'templates/settings.html', controller: 'SettingsController'})
+			.when('/about',     { templateUrl: 'templates/about.html'   , controller: 'MainController'    })
 			.otherwise( { redirectTo: '/'});
         mdlConfigProvider.floating = false;
 	}])
@@ -99,10 +99,15 @@ angular
 
 	.controller('QuizAddController', ['$scope', '$location', 'Quiz',
 		function($scope, $location, Quiz){
+			$scope.quiz = {};
 			$scope.create = function() {
 				$scope.quiz.date_time = $('.date_time').val();
-				Quiz.save($scope.quiz);
-				$location.path('/quizzes').replace();
+				Quiz.save($scope.quiz,
+					function(){
+						$location.path('/quizzes').replace();
+				 }, function(err) {
+				 		$scope.errors = err.data;
+				});
 			}
 		}
 	])
@@ -113,8 +118,12 @@ angular
 			$scope.quiz = Quiz.get({'id':$scope.id});
 			$scope.update = function() {
 				$scope.quiz.date_time = $('.date_time').val();
-				$scope.quiz.$update();
-				$location.path('/quizzes').replace();
+				$scope.quiz.$update(
+					function() {
+						$location.path('/quizzes').replace();
+				 }, function(err) {
+				 		$scope.errors = err.data;
+				});
 			}
 		}
 	])
@@ -142,8 +151,12 @@ angular
 			}
 			$scope.create = function() {
 				$scope.question.quiz_id = $scope.quiz_id;
-				Question.save($scope.question);
-				$location.path('/quiz/'+ $scope.quiz_id +'/questions').replace();
+				Question.save($scope.question,
+					function(){
+						$location.path('/quiz/'+ $scope.quiz_id +'/questions').replace();
+				 }, function(err){
+				 		$scope.errors = err.data;
+				});
 			}
 
 			$scope.optionCreate = function(ev) {
@@ -177,8 +190,12 @@ angular
 			$scope.question = Question.get({'quiz_id':$scope.quiz_id, 'id':$scope.id});
 			
 			$scope.update = function() {
-				$scope.question.$update();
-				$location.path('/quiz/'+ $scope.quiz_id +'/questions').replace();
+				$scope.question.$update(
+					function(){
+						$location.path('/quiz/'+ $scope.quiz_id +'/questions').replace();
+				 }, function(err){
+				 		$scope.errors = err.data;
+				});
 			}
 
 			$scope.optionCreate = function(ev) {
@@ -251,25 +268,52 @@ angular
 			$scope.user = User.get({id: $scope.user_id});
 
 			$scope.update = function() {
-				$scope.user.$update();
+				$scope.errors   = undefined;
+				$scope.successi = undefined;
+				$scope.successp = undefined;
+				$scope.user.$update(
+					function(res) { $scope.success = true;     },
+					function(err) { $scope.errors  = err.data; }
+				);
 			}
 
 			$scope.updatePassword = function(){
-				$scope.errors = undefined;
+				$scope.errors   = undefined;
+				$scope.successi = undefined;
+				$scope.successp = undefined;
 				User.updatePassword({id: $scope.user_id}, $scope.password,
 					function(res){
-						if(res == 'false') {
-						$scope.errors = { old_password: ["The old password doesn't match our record!"]}
-					} else {
-						$scope.success = "Password changed successfully!";
-					}
-				 }, function(err){
-					$scope.errors = err;
+						if(res[0] == 'f') {
+							$scope.errors = { old_password: ["The old password doesn't match our record!"]}
+						} else {
+							$scope.successp = true;
+							$scope.password = [];
+						}
+				 	}
+				  , function(err){
+					$scope.errors = err.data;
+					console.log($scope.errors);
 				});
 			};
 		}
 	])
 
+	/* Directive */
+	.directive('error', function() {
+		return {
+    		restrict: 'E',
+        	scope: { errors: '=' },
+			template: `
+				<div class="errors" ng-show="errors">
+					<span class="text-danger repeat-animation" ng-repeat="msg in errors"> {{msg}}</span>
+				</div>
+			`
+		};
+	})
+	/* End of Directive */
+
+
+	/* Filters */
 	.filter("asDate", function () {
     	return function(input) {
         	return Date.parse(input);;
@@ -300,3 +344,4 @@ angular
         	return output;
     	}
 	});
+	/* End of Filters */

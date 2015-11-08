@@ -6,6 +6,7 @@
 					<input class="mdl-textfield__input" ng-model="quiz.title" type="text" id="title" placeholder="Title" />
 					<label class="mdl-textfield__label" for="title"></label>
 			  	</div>
+		  		<error errors="errors.title"></error>
 
 				<div class="row">
 					<div class="col-sm-6">
@@ -16,12 +17,14 @@
 						      	<i style="cursor:pointer" data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i>
 						    </span>
 					  	</div>
+		  				<error errors="errors.date_time"></error>
 					</div>
 					<div class="col-sm-6">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" ng-model="quiz.duration" type="number" id="duration" placeholder="Duration" />
+							<input class="mdl-textfield__input" ng-model="quiz.duration" type="number" id="duration" placeholder="Duration in Minutes" />
 							<label class="mdl-textfield__label" for="duration"></label>
 					  	</div>
+		  				<error errors="errors.duration"></error>
 					</div>
 				</div>
 
@@ -29,6 +32,7 @@
 			    	<textarea class="mdl-textfield__input" ng-model="quiz.description" type="text" rows="3" id="description" placeholder="Description"></textarea>
 			    	<label class="mdl-textfield__label" for="description"></label>
 			  	</div>
+		  		<error errors="errors.description"></error>
 				
 				<div ng-if="!id">
 					<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="create()">Create</button><br><br>

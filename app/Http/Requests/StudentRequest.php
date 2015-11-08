@@ -24,7 +24,11 @@ class StudentRequest extends Request
     public function rules()
     {
         return [
-            //
+            'name'       => 'required | max:50',
+            'email'      => 'required | email',
+            'student_id' => 'required | max:15',
+            'batch'      => 'required | numeric',
+            'department' => 'required | max:50'
         ];
     }
 }
