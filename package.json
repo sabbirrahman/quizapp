@@ -1,10 +1,29 @@
 {
-  "private": true,
+  "nane": "quizapp",
+  "version": "1.0.0",
+  "private": false,
   "devDependencies": {
     "gulp": "^3.8.8",
     "gulp-angular-templatecache": "^1.8.0",
     "laravel-elixir": "^3.0.0"
   },
-  "dependencies": {
-  }
+  "name": "quizapp",
+  "description": "Quizapp is a web application for taking online quiz.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kryptonitesoft/quizapp.git"
+  },
+  "keywords": [
+    "quizapp",
+    "laravel-app",
+    "angular-app"
+  ],
+  "authors": [
+  	"Md. Sabbir Rahman <sabbir.jassim@gmail.com>",
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kryptonitesoft/quizapp/issues"
+  },
+  "homepage": "https://github.com/kryptonitesoft/quizapp#readme"
 }
